@@ -1,0 +1,104 @@
+$al-font-s: 1.4rem;
+$al-ifont-s: 1.9rem;
+
+$al-font-m: 1.8rem;
+$al-ifont-m: 2.5rem;
+
+.alert {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    opacity: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 1rem;
+
+        .icon {
+            font-size: $al-ifont-s;
+        }
+
+        p {
+            font-size: $al-font-s;
+            text-align: left;
+            margin: 0px;
+            padding: 0px;
+            color: white;
+        }
+    }
+
+    .closeBtn {
+        font-size: $al-ifont-s;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &.failure {
+        background-color: rgb(253, 237, 237);
+
+        .content {
+            p,
+            .icon {
+                color: rgb(95, 33, 32);
+            }
+        }
+    }
+
+    &.success {
+        background-color: rgb(237, 247, 237);
+
+        .content {
+            p,
+            .icon {
+                color: rgb(30, 70, 32);
+            }
+        }
+    }
+
+    @keyframes dissappear {
+        0% {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        10% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+    }
+    animation-name: dissappear;
+    animation-duration: 4.7s;
+}
+
+@media (min-width: 800px) {
+    .alert {
+        .content {
+            .icon {
+                font-size: $al-ifont-m;
+            }
+
+            p {
+                font-size: $al-font-m;
+            }
+        }
+        .closeBtn {
+            font-size: $al-ifont-m;
+        }
+    }
+}

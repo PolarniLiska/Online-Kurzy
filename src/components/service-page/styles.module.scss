@@ -1,0 +1,38 @@
+@import "/src/app/variables.module.scss";
+
+.servicePage {
+    .intro {
+        padding: 2rem $w-padding-s;
+
+        @media (min-width: 800px) {
+            padding: 2rem $w-padding-m;
+        }
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-self: center;
+        row-gap: 2rem;
+        margin-bottom: 4rem;
+
+        .textInfo {
+            text-align: center;
+
+            h1 {
+                font-size: $title-size-s;
+            }
+            p {
+                font-size: $font-size-s;
+                max-width: 950px;
+            }
+
+            @media (min-width: 800px) {
+                text-align: left;
+            }
+        }
+
+        .imageShowcase {
+            display: none;
+        }
+    }
+}

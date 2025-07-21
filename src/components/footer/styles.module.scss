@@ -1,0 +1,59 @@
+@import '/src/app/variables.module.scss';
+
+.footer {
+    width: 100%;
+    box-sizing: border-box;
+
+    .links {
+        background-color: #E6D5BA;
+        padding: 1rem $w-padding-s 1rem $w-padding-s;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        
+        @media (min-width: 800px) {
+            padding: 1rem $w-padding-m 4rem $w-padding-m;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            @media (min-width: 800px) {
+                align-items: flex-start;
+            }
+
+
+            p.title {
+                color: black;
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin: 2rem 0 1rem 0;
+            }
+
+            .item {
+                text-decoration: none;
+                color: black;
+                font-size: 1.6rem;
+                margin: 0;
+
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .signature {
+        background-color: #D8BD93;
+        text-align: center;
+        padding: 1rem 0rem;
+        font-size: 1.4rem;
+    }
+}

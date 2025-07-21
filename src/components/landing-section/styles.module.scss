@@ -1,0 +1,114 @@
+$breakpoint-m: 1280px;
+$breakpoint-l: 1680px;
+
+.landingScreen {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+
+    margin-bottom: 4rem;
+
+    @media (min-width: $breakpoint-m) {
+        padding: 0px 8%;
+    }
+
+    .landingContent {
+        width: 100%;
+        height: 55vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+
+        @media (min-width: $breakpoint-m) {
+            height: 100vh;
+            width: 50%;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 400;
+            width: 300px;
+
+            @media (min-width: $breakpoint-m) {
+                font-size: 3.6rem;
+                width: 100%;
+            }
+
+            @media (min-width: $breakpoint-l) {
+                font-size: 4.2rem;
+                width: 100%;
+            }
+        }
+
+        .ctaButton {
+            font-size: 1.8rem;
+            border: 1px solid #c59d5f;
+            padding: 15px 10px;
+            color: #c59d5f;
+            text-decoration: none;
+
+            transition: 0.5s ease;
+            cursor: pointer;
+
+            &:hover {
+                color: white;
+                background-color: #c59d5f;
+
+                transition: 0.5s ease;
+            }
+
+            @media (min-width: $breakpoint-m) {
+                font-size: 2.4rem;
+                padding: 20px 15px;
+            }
+        }
+    }
+
+    .landingImage {
+        z-index: -10;
+
+        position: absolute;
+        height: 100%;
+        width: 95%;
+        top: 0;
+        right: 0;
+
+        @media (min-width: $breakpoint-m) {
+            width: 80%;
+        }
+
+        .vladkaBackground {
+            position: absolute;
+
+            bottom: 0;
+            right: 7.5%;
+
+            width: auto;
+            height: 45vh;
+
+            aspect-ratio: 3/4;
+
+            @supports not (aspect-ratio: 3/4) {
+                padding-bottom: 40%;
+                width: 30%;
+                height: auto;
+            }
+
+
+            @media (min-width: $breakpoint-m) {
+                height: 80vh;
+
+                @supports not (aspect-ratio: 3/4) {
+                    padding-bottom: 60%;
+                    width: 45%;
+                    height: auto;
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,33 @@
+.cardSection {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 4rem;
+
+    @media (min-width: 1280px){
+        padding: 0px 8%;
+    }
+
+    .cardContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        width: 95%;
+        row-gap: 3rem;
+
+        @media (min-width: 836px) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+
+            column-gap: 3rem;
+            width: 100%;
+        }
+
+        .contentLink {
+            color: black;
+        }
+    }
+}

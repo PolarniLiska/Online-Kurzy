@@ -1,0 +1,21 @@
+@media (min-width: 800px) {
+    .page {
+        padding: 2rem $w-padding-m;
+
+        h1 {
+            font-size: $title-size-m;
+            text-align: left;
+        }
+
+        p {
+            font-size: $font-size-m;
+            max-width: 800px;
+        }
+
+        .priceList {
+            .item {
+                font-size: $font-size-m;
+            }
+        }
+    }
+}

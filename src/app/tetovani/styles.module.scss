@@ -1,0 +1,141 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    .container {
+        padding: 4rem $w-padding-s;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .title {
+        font-size: $title-size-s;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: $font-size-s;
+        text-align: center;
+        font-weight: 400;
+    }
+
+    .beforeTattoo {
+        background-color: #efe4d2;
+        text-align: center;
+        background-image: url("/golden_paths.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            text-align: left;
+            font-size: 1.8rem;
+            font-weight: 400;
+        }
+
+        ul li {
+            text-align: left;
+            font-size: 1.6rem;
+        }
+
+        @media (min-width: 800px) {
+            text-align: left;
+            background-size: 50% 100%;
+            background-position: 84%;
+            p {
+                margin-bottom: 4rem;
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                margin: 0;
+                font-weight: 600;
+            }
+
+            ul li {
+                font-size: 1.8rem;
+            }
+        }
+    }
+
+    .recommended {
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        ul li {
+            text-align: left;
+            font-size: 1.6rem;
+        }
+
+        @media (min-width: 800px) {
+            h2 {
+                text-align: left;
+                margin-bottom: 2.5rem;
+            }
+            ul li {
+                font-size: 1.8rem;
+            }
+        }
+    }
+
+    .careAfter {
+        background-color: #efe4d2;
+        text-align: center;
+        background-image: url("/golden_paths_rev.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        ol li {
+            text-align: left;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 800px) {
+            text-align: left;
+            background-size: 50% 100%;
+            background-position: 84%;
+
+            h3 {
+                margin: 0;
+                font-weight: 600;
+            }
+
+            ol li {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}
+
+@media (min-width: 800px) {
+    .page {
+        .container {
+            padding: 4rem $w-padding-m;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .title {
+            text-align: left;
+        }
+        .description {
+            text-align: left;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    .container {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 2rem $w-padding-s;
+
+        h1 {
+            font-size: $title-size-s;
+            text-align: center;
+        }
+
+        p {
+            font-size: $font-size-s;
+            text-align: center;
+        }
+
+        @media (min-width: 800px) {
+            padding: 2rem $w-padding-m;
+
+            h1,
+            p {
+                text-align: left;
+            }
+        }
+    }
+}

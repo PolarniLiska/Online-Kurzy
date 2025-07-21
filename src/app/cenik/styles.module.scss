@@ -1,0 +1,33 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    padding: 2rem $w-padding-s;
+
+    h1 {
+        font-size: $title-size-s;
+        text-align: center;
+    }
+
+    p {
+        font-size: $font-size-s;
+    }
+
+    .priceList {
+        display: flex;
+        flex-direction: column;
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: $font-size-s;
+            padding: 1rem;
+
+            &:nth-child(2n) {
+                background-color: #efe4d2;
+            }
+        }
+    }
+}
+
+@import "./styles-800.module.scss";

@@ -1,0 +1,55 @@
+@media (min-width: 1200px) {
+    .page {
+        .reception {
+            position: relative;
+
+            h2 {
+                font-size: $title-size-m - 0.2rem;
+                text-align: left;
+            }
+
+            .receptionist {
+                .personInfo {
+                    flex-direction: row;
+
+                    .imgContainer {
+                        order: 0;
+                    }
+
+                    .info {
+                        order: 1;
+                        padding-left: 2rem;
+                        align-self: flex-start;
+                        p {
+                            font-size: 2rem;
+                        }
+                    }
+                }
+
+                justify-content: flex-start;
+                align-items: flex-start;
+                p.message {
+                    max-width: 50% - $w-padding-m;
+                    text-align: left;
+                }
+            }
+
+            .showcase {
+                position: absolute;
+                width: 35%;
+                height: 100%;
+                top: 0;
+                right: $w-padding-m;
+
+                flex-direction: row;
+
+                .imgOne {
+                    transform: translate(-10%, 20%);
+                }
+                .imgTwo {
+                    transform: translate(0, -20%);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/cenik/page": "app/cenik/page.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/coa/node_modules/color-convert/route": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/coa/node_modules/color-convert/route.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/css-tree/lib/syntax/atrule/page": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/css-tree/lib/syntax/atrule/page.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/csso/node_modules/css-tree/lib/syntax/atrule/page": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/csso/node_modules/css-tree/lib/syntax/atrule/page.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/postcss-svgo/node_modules/css-tree/lib/syntax/atrule/page": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/postcss-svgo/node_modules/css-tree/lib/syntax/atrule/page.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/express/lib/router/route": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/express/lib/router/route.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/color-convert/route": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/color-convert/route.js",
+  "/kosmeticke-sluzby/[slug]/my-app/node_modules/svgo/node_modules/color-convert/route": "app/kosmeticke-sluzby/[slug]/my-app/node_modules/svgo/node_modules/color-convert/route.js",
+  "/kosmeticke-sluzby/page": "app/kosmeticke-sluzby/page.js",
+  "/page": "app/page.js",
+  "/rezervace/page": "app/rezervace/page.js",
+  "/tetovani/microblading/page": "app/tetovani/microblading/page.js",
+  "/skoleni/page": "app/skoleni/page.js",
+  "/tetovani/page": "app/tetovani/page.js",
+  "/tetovani/philon-microneedling/page": "app/tetovani/philon-microneedling/page.js",
+  "/tetovani/tetovani-ocnich-linek/page": "app/tetovani/tetovani-ocnich-linek/page.js",
+  "/tetovani/tetovani-rtu/page": "app/tetovani/tetovani-rtu/page.js",
+  "/tetovani/pudrove-oboci/page": "app/tetovani/pudrove-oboci/page.js",
+  "/kosmeticke-sluzby/[slug]/page": "app/kosmeticke-sluzby/[slug]/page.js"
+}

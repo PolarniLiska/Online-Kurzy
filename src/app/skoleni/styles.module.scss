@@ -1,0 +1,81 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    padding: 4rem $w-padding-s;
+    box-sizing: border-box;
+    width: 100%;
+
+    h1 {
+        padding-left: 2rem;
+        font-size: $title-size-s;
+        text-align: center;
+    }
+
+    .schooling ul,
+    .schooling li {
+        font-size: 2rem;
+        /* pokud používáte 10px v html => 1.6rem = 16px */
+        line-height: 1.5;
+        /* případně další styl, jaký chcete mít */
+    }
+
+    .schoolings {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+
+        .schooling,
+        .priceList {
+            display: flex;
+            flex-direction: column;
+
+            width: 100%;
+            box-sizing: border-box;
+            padding: 2rem;
+
+            background-color: transparent;
+
+            &:nth-child(2n) {
+                background-color: #efe4d2;
+            }
+
+            h2 {
+                text-align: center;
+                font-size: 2rem;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            h3 {
+                text-align: center;
+                font-size: 1.8rem;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            p {
+                margin-bottom: 0rem;
+                text-align: center;
+                font-size: 1.6rem;
+            }
+
+            ul li {
+                text-align: left;
+            }
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.6rem;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
+}
+
+@import "./styles-800.module.scss";

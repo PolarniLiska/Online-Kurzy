@@ -1,0 +1,173 @@
+.onlineKurzyPage {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.heroSection {
+  position: relative;
+  min-height: 340px;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+}
+.heroBgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.heroBgImg {
+  object-fit: cover;
+  filter: blur(4px) brightness(0.6);
+  z-index: 0;
+}
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-size: 2.6rem;
+    color: #fff;
+    margin: 0 0 1.2rem 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  p {
+    font-size: 1.3rem;
+    color: #fff;
+    margin: 0 0 2rem 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+}
+
+.lessonsSection {
+  padding: 2rem 0;
+  h2 {
+    text-align: center;
+    color: #c59d5f;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+.lessonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 0 2vw;
+  @media (min-width: 900px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 6vw;
+  }
+}
+.lessonsList .card {
+  width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s;
+  overflow: hidden;
+  @media (max-width: 899px) {
+    width: 100%;
+    max-width: 320px;
+    height: 220px;
+  }
+}
+.lessonsList .title {
+  font-size: 1.2rem;
+  padding: 10px 0;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.6em;
+  line-height: 1.3em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 2.6em;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lessonsList .title span {
+  display: block;
+  font-size: 1.2rem;
+  line-height: 1.3em;
+}
+.lessonsList .title .small {
+  font-size: 1.05rem;
+  color: #7a6a4f;
+}
+.lessonsList .content {
+  font-size: 1rem;
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+  max-height: 2.6em;
+  line-height: 1.3em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.benefitSection {
+  background: #f1f1f1;
+  border-radius: 1.5rem;
+  padding: 3rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+.benefitContent {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  h2 {
+    color: #c59d5f;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  ul {
+    color: #222;
+    font-size: 1.5rem;
+    padding-left: 1.2rem;
+    margin: 0 0 1.5rem 0;
+    li {
+      margin-bottom: 0.9rem;
+    }
+  }
+} 

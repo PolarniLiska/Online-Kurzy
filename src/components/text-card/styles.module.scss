@@ -1,0 +1,28 @@
+@import "/src/app/variables.module.scss";
+
+.card {
+    width: 100%;
+    height: auto;
+
+    background-color: #f1f1f1;
+
+    .title {
+        text-align: center;
+        font-size: 2.4rem;
+        color: white;
+        background-color: #c59d5f;
+        padding: 10px 0px;
+        margin: 0px;
+        box-sizing: border-box;
+
+        font-weight: 400;
+    }
+
+    .content {
+        color: black;
+        text-align: center;
+        font-size: $font-size-s;
+        padding: 20px 10px 40px 10px;
+        box-sizing: border-box;
+    }
+}

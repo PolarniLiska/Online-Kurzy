@@ -1,0 +1,181 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    width: 100%;
+
+    h1 {
+        padding: 2rem $w-padding-s;
+        text-align: center;
+        font-size: $title-size-s;
+    }
+
+    .intro {
+        padding: 2rem $w-padding-s;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 2rem;
+        .info {
+            order: 0;
+            text-align: center;
+            font-size: $font-size-s;
+
+            .upper {
+                margin-bottom: 2rem;
+
+                a {
+                    color: black;
+                }
+            }
+
+            .bottom {
+                a {
+                    color: black;
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+            }
+
+            p {
+                padding: 0;
+                margin: 0;
+            }
+        }
+        .imageContainer {
+            order: 1;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4/3;
+            max-width: 450px;
+
+            @supports not (aspect-ratio: 16/9) {
+                width: 50%;
+                padding-bottom: 27.75%;
+
+                max-width: unset;
+            }
+        }
+    }
+
+    .reception {
+        background-color: #efe4d2;
+        background-image: url("/golden_paths.png");
+        background-repeat: no-repeat;
+        background-size: 90% 100%;
+
+        padding: 4rem $w-padding-s 4rem $w-padding-s;
+        box-sizing: border-box;
+        width: 100%;
+
+        h2 {
+            text-align: left;
+            font-size: 2rem;
+            padding-left: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .phone {
+            text-align: left;
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            margin: 0 0 1.5rem 0;
+            padding-left: 0;
+            color: black;
+            width: 100%;
+            display: block;
+            a {
+                text-decoration: none;
+                color: black;
+                font-size: inherit;
+                font-weight: inherit;
+            }
+        }
+
+        .receptionist {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: stretch;
+
+            p {
+                text-align: center;
+                font-size: $font-size-s;
+                margin-bottom: 4rem;
+            }
+
+            .personInfo {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .imgContainer {
+                    order: 1;
+                    position: relative;
+                    width: 250px;
+                    height: 333px;
+                }
+
+                .info {
+                    order: 0;
+                    margin-bottom: 2rem;
+                    p {
+                        text-align: center;
+                        font-size: $font-size-s;
+                        margin: 0;
+                        padding: 0;
+                        color: black;
+
+                        a {
+                            text-decoration: none;
+                            color: black;
+                        }
+                    }
+                }
+
+                p {
+                    color: black;
+                    text-align: center;
+                    font-size: $font-size-s;
+                }
+            }
+        }
+
+        .showcase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 2rem;
+
+            .imgOne,
+            .imgTwo {
+                position: relative;
+                aspect-ratio: 3/4;
+                width: 60%;
+                max-width: 350px;
+
+                @supports not (aspect-ratio: 16/9) {
+                    max-width: unset;
+                    padding-bottom: 79.8%;
+                }
+            }
+        }
+    }
+}
+
+@import "./styles-800.module.scss";
+
+@media (min-width: 800px) {
+    .reception {
+        padding: 6rem $w-padding-m 6rem $w-padding-m;
+        h2 {
+            padding-left: 0;
+        }
+        .phone {
+            padding-left: 0;
+        }
+    }
+}

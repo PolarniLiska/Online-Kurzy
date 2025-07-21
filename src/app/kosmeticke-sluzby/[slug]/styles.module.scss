@@ -1,0 +1,94 @@
+@import "/src/app/variables.module.scss";
+
+.page {
+    padding: 2rem $w-padding-s;
+
+    h1 {
+        font-size: $title-size-s;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 2.2rem;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    p {
+        font-size: $font-size-s;
+    }
+
+    .priceList {
+        display: flex;
+        flex-direction: column;
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: $font-size-s;
+            padding: 1rem;
+
+            &:nth-child(2n) {
+                background-color: #efe4d2;
+            }
+        }
+    }
+    .priceList {
+        display: flex;
+        flex-direction: column; /* Každá položka bude pod sebou */
+        gap: 1rem; /* Mezery mezi položkami */
+    }
+    
+    .item {
+        display: flex;
+        justify-content: space-between; /* Levá část vlevo, pravá část vpravo */
+        align-items: center;
+        gap: 1rem; /* Trochu prostoru mezi levou a pravou částí */
+    }
+    
+    .left {
+        display: flex;
+        flex-direction: column; /* Název a popis pod sebou */
+        width: 70%; /* Určuje, že levá část zabírá větší prostor */
+    }
+    .priceList .price {
+        white-space: nowrap; /* Zabrání zalamování textu v ceně */
+    }
+
+    
+    .description {
+        font-size: 1.5rem; /* Malé písmo pro popis */
+        color: #666; /* Světlejší barva textu */
+        margin-top: 0.2rem; /* Trochu prostoru mezi názvem a popisem */
+        margin-bottom: 0;
+
+    }
+    .infoIcon {
+        margin-left: 5px;
+        cursor: pointer;
+        color: #007bff;
+        font-size: 1.7rem;
+      }
+      .customTooltip {
+        font-size: 50px !important; // Zvětší text tooltipu
+        line-height: 1.5;
+        padding: 8px;
+        max-width: 200px;
+      }
+      
+      .customTooltip ul {
+        font-size: 50px !important; /* Zvětšení písma v seznamu */
+        list-style-type: disc !important; /* Přidání bullet points */
+        padding-left: 20px !important; /* Nastavení vnitřního odsazení pro seznam */
+      }
+      
+      .customTooltip li {
+        font-size: 50px !important; /* Zvětšení písma pro jednotlivé položky */
+      }
+  
+
+    
+}
+
+@import "./styles-800.module.scss";

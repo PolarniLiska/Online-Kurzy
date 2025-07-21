@@ -1,0 +1,18 @@
+.button {
+    color: #C59D5F;
+    display: inline;
+    border: 1px solid #C59D5F;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.8rem;
+    padding: 10px 15px;
+
+    transition: .5s ease;
+
+    &:hover {
+        background-color: #C59D5F;
+        color: #F1F1F1;
+
+        transition: .5s ease;
+    }
+}

@@ -1,0 +1,156 @@
+@import "/src/app/variables.module.scss";
+
+.formSection {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4rem $w-padding-s;
+
+    display: flex;
+    flex-direction: column;
+
+    .titleSection {
+        text-align: center;
+
+        p {
+            font-size: 2rem;
+            font-weight: 400;
+            color: black;
+            margin-top: 0rem;
+        }
+
+        .title {
+            font-size: 2.4rem;
+            color: #c59d5f;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        @media (min-width: 800px) {
+            text-align: left;
+            padding: 0px $w-padding-m;
+        }
+    }
+
+    .windowSection {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            margin-bottom: 4rem;
+
+            .error {
+                color: red;
+                margin: 0;
+                margin-bottom: 5px;
+                padding: 0;
+                font-size: 1.4rem;
+            }
+
+            .textInput,
+            .textAreaInput {
+                font-family: "Barlow", sans-serif;;
+                margin: 0;
+                margin-bottom: 1rem;
+                padding: 1rem 1rem;
+
+                font-size: $font-size-s;
+                border: 1px solid black;
+                border-radius: 1rem;
+
+                &::placeholder {
+                    color: black;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            .submitButton {
+                padding: 1rem 1rem;
+                font-size: $font-size-s;
+                border: 1px solid black;
+                border-radius: 1rem;
+                background: transparent;
+                font-family: "Barlow", sans-serif;;
+
+                
+                &:hover {
+                    cursor: pointer;
+                }
+                
+                &.isSendingEmail {
+                    cursor: progress;
+                    color: gray;
+                    background-color: rgba(0,0,0,.05);
+                }
+            }
+        }
+
+        .address {
+            .info {
+                text-align: center;
+                font-size: $font-size-s;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                    font-weight: 600;
+                }
+
+                margin-bottom: 1rem;
+            }
+            .map {
+                .googleMap {
+                    border: none;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 16/9;
+
+                    border-radius: 1rem;
+
+                    @supports not (aspect-ratio: 16/9) {
+                        min-height: 300px;
+                    }
+                }
+            }
+        }
+
+        @media (min-width: 800px) {
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 0px $w-padding-m;
+            column-gap: 6%;
+
+            .form {
+                flex-basis: 1px;
+                flex-grow: 1;
+
+                justify-content: flex-start;
+
+                .submitButton {
+                    align-self: flex-end;
+                    padding: 1rem 3rem;
+                    margin-bottom: 0px;
+                }
+                margin-bottom: 0px;
+            }
+
+            .address {
+                flex-basis: 1px;
+                flex-grow: 1;
+
+                .info {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+@media (min-width: 800px) {
+    .page {
+        h1 {
+            padding: 2rem $w-padding-m;
+            font-size: $title-size-m;
+            text-align: left;
+
+            margin-bottom: 3rem;
+        }
+
+        .intro {
+            padding: 2rem $w-padding-m;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+
+            font-size: $font-size-m;
+            margin-bottom: 4rem;
+
+            .imageContainer {
+                order: 0;
+                width: 40%;
+                max-width: unset;
+            }
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-start;
+
+                order: 1;
+                width: 60%;
+
+                text-align: left;
+                padding-left: 2rem;
+                box-sizing: border-box;
+            }
+        }
+
+        .reception {
+            padding: 18rem $w-padding-m 18rem $w-padding-m;
+            margin-bottom: 4rem;
+            background-size: 40% 100%;
+            background-position: 70%;
+        }
+    }
+}
+
+@import "./styles-1200.module.scss";

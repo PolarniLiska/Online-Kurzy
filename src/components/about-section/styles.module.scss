@@ -1,0 +1,100 @@
+@import "/src/app/variables.module.scss";
+
+.aboutSection {
+    background-color: #efe4d2;
+    padding: 40px $w-padding-s;
+
+    background-image: url("/golden_paths.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+
+    @media (min-width: 1200px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 40px $w-padding-m;
+        box-sizing: border-box;
+
+        background-size: 40% 100%;
+        background-position-x: 90%;
+    }
+
+    .vladkaImgLarge {
+        display: none;
+
+        @media (min-width: 1200px) {
+            position: relative;
+            display: block;
+            height: auto;
+            width: 100%;
+            max-width: 250px;
+            aspect-ratio: 3/4;
+            
+            @supports not (aspect-ratio: 3/4) {
+                max-width: unset;
+                width: 250px;
+                height: 333px;
+            }
+        }
+
+    }
+
+    .sectionContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        font-size: $font-size-s;
+        text-align: center;
+
+        a {
+            color: black;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        @media (min-width: 1200px) {
+            flex-grow: 1;
+            text-align: left;
+
+            padding-left: 2rem;
+            box-sizing: border-box;
+
+            align-items: flex-start;
+            justify-content: space-between;
+
+            @supports not (aspect-ratio: 3/4) {
+                width: 0px;
+            }
+
+            .quotation {
+                margin: 0;
+            }
+        }
+
+        p {
+            margin: 0px;
+            margin-bottom: 2rem;
+        }
+
+        .vladkaImg {
+            position: relative;
+            width: 80%;
+            max-width: 250px;
+            aspect-ratio: 3/4;
+
+            margin-bottom: 2rem;
+
+            @media (min-width: 1200px) {
+                display: none;
+            }
+
+            @supports not (aspect-ratio: 3/4) {
+                width: 250px;
+                height: 333px;
+            }
+        }
+    }
+}

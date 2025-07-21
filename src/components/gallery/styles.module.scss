@@ -1,0 +1,132 @@
+@import "/src/app/variables.module.scss";
+
+.gallery {
+    text-align: center;
+    padding: 2rem $w-padding-s;
+
+    background-color: #efe4d2;
+    background-image: url("/golden_paths.png");
+    background-repeat: no-repeat;
+    background-size: 90% 100%;
+
+    @media (min-width: 800px) {
+        padding: 2rem $w-padding-m;
+        background-size: 50% 100%;
+        background-position: 84%;
+    }
+
+    h3 {
+        font-size: $font-size-s;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 2rem;
+
+        @media (min-width: 800px) {
+            text-align: left;
+        }
+    }
+
+    .galleryContent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+        row-gap: 0.8rem;
+        column-gap: 1%;
+        box-sizing: border-box;
+
+        .imageContainer {
+            position: relative;
+            width: 49%;
+            height: auto;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            border-radius: 1rem;
+
+            @supports not (aspect-ratio: 3/4) {
+                padding-bottom: 49%;
+            }
+
+            @media (min-width: 1000px) {
+                width: 32.66%;
+
+                @supports not (aspect-ratio: 3/4) {
+                    padding-bottom: 32.66%;
+                }
+            }
+
+            @media (min-width: 1300px) {
+                width: 24.25%;
+
+                @supports not (aspect-ratio: 3/4) {
+                    padding-bottom: 24.25%;
+                }
+            }
+
+            img {
+                object-fit: cover;
+                border-radius: 1rem;
+                transition: transform 0.5s ease;
+
+                &:hover {
+                    border-radius: 1rem;
+                    transform: scale(1.2);
+                    transition: transform 0.5s ease;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.preview {
+    z-index: 9999999999;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .controlPanel {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 200px;
+
+        .closeBtn {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+
+            .icon {
+                font-size: 3rem;
+                color: white;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .imageContainer {
+        position: relative;
+        width: 80%;
+        height: 80vh;
+        img {
+            object-fit: contain;
+        }
+    }
+}

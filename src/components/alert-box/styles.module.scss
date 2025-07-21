@@ -1,0 +1,15 @@
+.alertBox {
+    position: fixed;
+    width: 99.5%;
+    top: .25rem;
+    left: .25%;
+    z-index: 9999999;
+    box-sizing: border-box;
+
+    row-gap: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
