@@ -91,4 +91,4 @@ Platby zajišťuje **Shopify** a následně přes webhook posílá data o objedn
 
 ## 👨‍💻 Autor
 
-Tento systém vyvíjí ## Jan Spiška  
+Tento systém vyvíjí Jan Spiška  
