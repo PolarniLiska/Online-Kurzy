@@ -5,10 +5,10 @@ import bcrypt from 'bcryptjs';
 export async function POST(req) {
   await connectDB();
 
-  const { email, password } = await req.json();
+  const { name, email, password } = await req.json();
 
-  if (!email || !password) {
-    return new Response(JSON.stringify({ error: 'Email a heslo jsou povinné' }), { status: 400 });
+  if (!name || !email || !password) {
+    return new Response(JSON.stringify({ error: 'Jméno, email a heslo jsou povinné' }), { status: 400 });
   }
 
   const existingUser = await User.findOne({ email });
@@ -19,6 +19,7 @@ export async function POST(req) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const newUser = new User({
+    name,
     email,
     passwordHash,
     activated: false,

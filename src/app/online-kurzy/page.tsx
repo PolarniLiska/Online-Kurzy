@@ -54,7 +54,7 @@ function RegistrationForm() {
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
       if (res.ok) {
         setSuccess("✅ Uživatel zaregistrován");
@@ -139,10 +139,11 @@ function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       if (res.ok) {
+        const { user } = await res.json();
         setSuccess("✅ Přihlášení úspěšné");
-        setLoggedInUser(email); // Store email on successful login
-        // Don't clear email input, it's needed for activation
+        setLoggedInUser({ name: user.name, email: user.email }); // Store full user object
         setPassword("");
       } else {
         const data = await res.json().catch(() => ({}));
@@ -245,15 +246,15 @@ function ActivateCourseForm({ userEmail }: { userEmail: string }) {
 
 // Simple context for managing auth state
 const AuthContext = React.createContext<{
-    loggedInUser: string | null;
-    setLoggedInUser: (email: string | null) => void;
+    loggedInUser: { name: string; email: string } | null;
+    setLoggedInUser: (user: { name: string; email: string } | null) => void;
     isActivated: boolean;
     setActivated: (status: boolean) => void;
     loading: boolean;
 } | null>(null);
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [loggedInUser, setLoggedInUser] = useState<string | null>(null);
+    const [loggedInUser, setLoggedInUser] = useState<{ name: string; email: string } | null>(null);
     const [isActivated, setActivated] = useState(false);
     const [loading, setLoading] = useState(true); // Add loading state
 
@@ -263,7 +264,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
                 const res = await fetch('/api/me');
                 if (res.ok) {
                     const { user } = await res.json();
-                    setLoggedInUser(user.email);
+                    setLoggedInUser({ name: user.name, email: user.email });
                     setActivated(user.activated);
                 }
             } catch (error) {
@@ -287,6 +288,32 @@ function useAuth() {
     return context;
 }
 
+// Czech name declension for vocative case (5th case)
+function toVocative(name: string): string {
+    if (!name) return '';
+    const lowerName = name.toLowerCase();
+    const lastChar = lowerName.slice(-1);
+    const lastTwoChars = lowerName.slice(-2);
+
+    // Specific exceptions
+    if (lowerName === 'Ježíš') return 'Ježíši';
+    if (lowerName === 'bůh') return 'Bože';
+    
+    // General rules (simplified)
+    if (lastTwoChars === 'ec') return name.slice(0, -2) + 'če';
+    if (lastChar === 'a') return name.slice(0, -1) + 'o';
+    if (lastChar === 'o') return name;
+    if (lastChar === 'e') return name;
+    if (lastChar === 'k') return name.slice(0, -1) + 'ku';
+    if (lastChar === 'h') return name.slice(0, -1) + 'hu';
+    if (lastChar === 'g') return name.slice(0, -1) + 'gu';
+    if (['c', 'č', 'j', 'ň', 'ř', 'š', 'ž'].includes(lastChar)) return name + 'i';
+    
+    // Default for most male names
+    return name + 'e';
+}
+
+
 export default function OnlineKurzyPage() {
   return (
     <AuthProvider>
@@ -297,8 +324,18 @@ export default function OnlineKurzyPage() {
 
 
 function OnlineKurzyContent() {
-  const { loggedInUser, isActivated, loading } = useAuth();
+  const { loggedInUser, isActivated, loading, setLoggedInUser, setActivated } = useAuth();
   
+  const handleLogout = async () => {
+    try {
+        await fetch('/api/logout', { method: 'POST' });
+        setLoggedInUser(null);
+        setActivated(false);
+    } catch (error) {
+        console.error('Logout failed', error);
+    }
+  };
+
   if (loading) {
       return (
           <main className={styles.onlineKurzyPage}>
@@ -379,10 +416,18 @@ function OnlineKurzyContent() {
         {/* Přihlášení & Aktivace */}
         <div>
           <h2 className="text-2xl font-bold mb-4 text-center">
-            {loggedInUser ? `Přihlášen jako ${loggedInUser}` : "Přihlášení"}
+            {loggedInUser ? `Vítej, ${toVocative(loggedInUser.name)}!` : "Přihlášení"}
           </h2>
+          {loggedInUser && (
+               <button 
+                   onClick={handleLogout}
+                   className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 rounded mb-4"
+               >
+                   Odhlásit se
+               </button>
+          )}
           {!loggedInUser && <LoginForm />}
-          {loggedInUser && !isActivated && <ActivateCourseForm userEmail={loggedInUser} />}
+          {loggedInUser && !isActivated && <ActivateCourseForm userEmail={loggedInUser.email} />}
           {loggedInUser && isActivated && (
              <div className="text-center text-green-700 font-bold p-4 bg-green-100 rounded">
                 ✅ Kurz je aktivní a odemčený.

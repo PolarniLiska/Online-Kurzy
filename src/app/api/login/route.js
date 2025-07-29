@@ -37,7 +37,15 @@ export async function POST(req) {
     path: '/',
   });
 
-  return new Response(JSON.stringify({ message: '✅ Přihlášení úspěšné' }), {
+  // Return user data along with the success message
+  const userResponse = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      activated: user.activated,
+  };
+
+  return new Response(JSON.stringify({ message: '✅ Přihlášení úspěšné', user: userResponse }), {
     status: 200,
     headers: {
       'Content-Type': 'application/json',
