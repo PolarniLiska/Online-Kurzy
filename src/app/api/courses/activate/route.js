@@ -2,8 +2,9 @@ import connectDB from '../../../../../lib/mongodb.js';
 import Code from '../../../../../models/Code.js';
 import User from '../../../../../models/User.js';
 import { ensureEnoughCodes } from '../../codes/seed/route.js';
+import { withAuth } from '../../../../../lib/middleware.js';
 
-export async function POST(req) {
+async function handlePOST(req) {
   await connectDB();
 
   try {
@@ -11,6 +12,11 @@ export async function POST(req) {
 
     if (!email || !code) {
       return new Response(JSON.stringify({ error: 'Email and code are required.' }), { status: 400 });
+    }
+
+    // Ověř, že uživatel aktivuje svůj vlastní účet
+    if (req.user.email !== email) {
+      return new Response(JSON.stringify({ error: 'Můžete aktivovat pouze svůj vlastní účet.' }), { status: 403 });
     }
 
     // Find the code
@@ -51,4 +57,7 @@ export async function POST(req) {
     console.error('Activation Error:', error);
     return new Response(JSON.stringify({ error: 'Server error during activation.' }), { status: 500 });
   }
-} 
+}
+
+// Chráněný endpoint - vyžaduje přihlášení (ale ne aktivaci, protože se aktivuje)
+export const POST = withAuth(handlePOST); 

@@ -1,8 +1,9 @@
 import connectDB from '../../../../lib/mongodb.js';
 import User from '../../../../models/User.js';
 import bcrypt from 'bcryptjs';
+import { withAuth } from '../../../../lib/middleware.js';
 
-export async function POST(req) {
+async function handlePOST(req) {
   await connectDB();
 
   const passwordHash = await bcrypt.hash('testheslo123', 10);
@@ -21,3 +22,6 @@ export async function POST(req) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
+
+// Chráněný endpoint - vyžaduje přihlášení
+export const POST = withAuth(handlePOST);
