@@ -6,6 +6,7 @@ import Button from "@/components/button";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
+
 const lessons = [
   {
     title: "Úvod do tetování obočí",
@@ -32,7 +33,7 @@ const lessons = [
 
 import React, { useState, useEffect } from "react";
 
-function RegistrationForm() {
+function RegistrationForm({ onRegister }: { onRegister?: (user: { name: string; email: string; activated: boolean }) => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +41,7 @@ function RegistrationForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const { setLoggedInUser, setActivated } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,7 +59,19 @@ function RegistrationForm() {
         body: JSON.stringify({ name, email, password }),
       });
       if (res.ok) {
-        setSuccess("✅ Uživatel zaregistrován");
+        // Po registraci automaticky přihlásím uživatele
+        const loginRes = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        if (loginRes.ok) {
+          const { user } = await loginRes.json();
+          setLoggedInUser({ name: user.name, email: user.email });
+          setActivated(user.activated);
+          if (onRegister) onRegister(user);
+        }
+        setSuccess("✅ Uživatel zaregistrován a přihlášen");
         setName(""); setEmail(""); setPassword(""); setPassword2("");
       } else {
         const data = await res.json().catch(() => ({}));
@@ -124,8 +138,7 @@ function LoginForm() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   
-  // New state to manage login status
-  const { setLoggedInUser } = useAuth();
+  const { setLoggedInUser, setActivated } = useAuth();
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -143,7 +156,8 @@ function LoginForm() {
       if (res.ok) {
         const { user } = await res.json();
         setSuccess("✅ Přihlášení úspěšné");
-        setLoggedInUser({ name: user.name, email: user.email }); // Store full user object
+        setLoggedInUser({ name: user.name, email: user.email });
+        setActivated(user.activated);
         setPassword("");
       } else {
         const data = await res.json().catch(() => ({}));
@@ -325,12 +339,23 @@ export default function OnlineKurzyPage() {
 
 function OnlineKurzyContent() {
   const { loggedInUser, isActivated, loading, setLoggedInUser, setActivated } = useAuth();
-  
+  const [showLogin, setShowLogin] = useState(false);
+  const [showHeroForm, setShowHeroForm] = useState(false);
+  const [afterRegister, setAfterRegister] = useState(false);
+
+  useEffect(() => {
+    if (loggedInUser && isActivated) {
+      setShowHeroForm(false);
+      setAfterRegister(false);
+    }
+  }, [loggedInUser, isActivated]);
+
   const handleLogout = async () => {
     try {
         await fetch('/api/logout', { method: 'POST' });
         setLoggedInUser(null);
         setActivated(false);
+        setAfterRegister(false);
     } catch (error) {
         console.error('Logout failed', error);
     }
@@ -347,23 +372,86 @@ function OnlineKurzyContent() {
   }
 
   return (
-    <main className={styles.onlineKurzyPage}>
-      {/* Hero sekce */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroBgWrapper}>
-          <Image src="/kurzy/kurz-hero.png" alt="Online kurz tetování obočí" fill priority className={styles.heroBgImg} />
-          <div className={styles.heroOverlay} />
-        </div>
-        <div className={styles.heroContent}>
-          <h1>Online kurzy tetování obočí</h1>
-          <p>Ovládněte moderní techniky permanentního make-upu z pohodlí domova. Vhodné pro začátečníky i pokročilé.</p>
-          <Button title="Koupit kurz" href="https://shop.salonanno.cz/products/online-kurz-tetovani-oboci" />
-        </div>
-      </section>
+    <>
+      <main className={styles.onlineKurzyPage}>
+        {/* Hero sekce - vždy viditelná */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroBgWrapper}>
+            <Image src="/kurzy/kurz-hero.png" alt="Online kurz tetování obočí" fill priority className={styles.heroBgImg} />
+            <div className={styles.heroOverlay} />
+          </div>
+          <div className={styles.heroContent}>
+            <h1>Online kurzy tetování obočí</h1>
+            <p>Ovládněte moderní techniky permanentního make-upu z pohodlí domova. Vhodné pro začátečníky i pokročilé.</p>
+            <a className={styles.heroButton} href="https://shop.salonanno.cz/products/online-kurz-tetovani-oboci" target="_blank" rel="noopener noreferrer">Koupit kurz</a>
+            {/* Přihlásit se / Aktivovat kurz tlačítko nebo přivítání */}
+            {loggedInUser && isActivated ? (
+              <div style={{marginTop:'1.2rem'}}>
+                <div style={{fontWeight:600,fontSize:'1.1rem',marginBottom:'0.5rem',color:'#fff',textShadow:'0 2px 8px rgba(0,0,0,0.18)'}}>Vítejte, {toVocative(loggedInUser.name)}!</div>
+                <button className={styles.heroSecondaryButton} onClick={handleLogout}>Odhlásit se</button>
+              </div>
+            ) : (
+              <>
+                {!loggedInUser && (
+                  <button className={styles.heroSecondaryButton} onClick={() => { setShowHeroForm(v => !v); setAfterRegister(false); }}>
+                    {showHeroForm ? "Zavřít" : "Přihlásit se"}
+                  </button>
+                )}
+                {loggedInUser && !isActivated && (
+                  <button className={styles.heroSecondaryButton} onClick={() => setShowHeroForm(v => !v)}>
+                    {showHeroForm ? "Zavřít" : "Aktivovat kurz"}
+                  </button>
+                )}
+              </>
+            )}
+            {/* Formulář rozbalený s animací */}
+            {showHeroForm && (
+              <div className={styles.heroFormWrapper}>
+                {loggedInUser && !isActivated ? (
+                  <>
+                    <h1>Aktivace kurzu</h1>
+                    <p>Zadejte aktivační kód, který jste obdrželi po zakoupení kurzu.</p>
+                    <ActivateCourseForm userEmail={loggedInUser.email} />
+                    <div className={styles.heroAuthLinks}>
+                      <button onClick={handleLogout} style={{background:'#7a6a4f',color:'#fff',border:'none',borderRadius:'8px',padding:'0.7rem 1.5rem',fontWeight:600,cursor:'pointer',marginTop:'1.5rem'}}>Odhlásit se</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className={`${styles.formContainer} ${!showLogin ? styles.formActive : ''}`}>
+                      <div className={styles.formInner}>
+                        <h1>Registrace</h1>
+                        <p>Vytvořte si účet a získejte přístup ke kurzu.</p>
+                        <RegistrationForm onRegister={() => { setAfterRegister(true); setShowLogin(false); }} />
+                        <div className={styles.heroAuthLinks}>
+                          <a href="#login" onClick={e => { e.preventDefault(); setShowLogin(true); }}>
+                            Máte už účet? Přihlaste se zde
+                          </a>
+                        </div>
+                      </div>
+                    </div>
 
-      {/* Course content - shown only if activated */}
-      {isActivated ? (
-        <>
+                    <div className={`${styles.formContainer} ${showLogin ? styles.formActive : ''}`}>
+                      <div className={styles.formInner}>
+                        <h1>Přihlášení</h1>
+                        <p>Pokračujte do své vzdělávací cesty.</p>
+                        <LoginForm />
+                        <div className={styles.heroAuthLinks}>
+                          <a href="#register" onClick={e => { e.preventDefault(); setShowLogin(false); setAfterRegister(false); }}>
+                            Nemáte účet? Zaregistrujte se zde
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Obsah kurzu - pouze pro přihlášené a aktivované */}
+        {loggedInUser && isActivated && (
           <section className={styles.lessonsSection}>
             <h2>Obsah kurzu</h2>
             <div className={styles.lessonsList}>
@@ -384,57 +472,22 @@ function OnlineKurzyContent() {
               ))}
             </div>
           </section>
-          <section className={styles.benefitSection}>
-            <div className={styles.benefitContent}>
-              <h2>Proč si vybrat náš online kurz?</h2>
-              <ul>
-                <li>Flexibilní studium kdykoliv a odkudkoliv</li>
-                <li>Praktické ukázky a detailní návody</li>
-                <li>Podpora zkušené lektorky Vlaďky Anděl Liškové</li>
-                <li>Přístup ke kurzu na počítači i mobilu</li>
-                <li>Certifikát o absolvování</li>
-              </ul>
-            </div>
-          </section>
-        </>
-      ) : (
-         <section className="text-center p-8 bg-gray-100/50 my-8">
-            <h2 className="text-2xl font-bold">Obsah kurzu je zamčený</h2>
-            <p className="mt-2">Pro zobrazení obsahu se přihlaste a aktivujte kurz pomocí kódu.</p>
-         </section>
-      )}
-
-      {/* REGISTRATION & LOGIN SECTIONS */}
-      <section className="max-w-xl mx-auto mt-12 mb-8 p-8 bg-white/80 rounded-lg shadow flex flex-col gap-12">
-        {/* Registrace */}
-        {!loggedInUser && (
-          <div>
-            <h2 className="text-2xl font-bold mb-4 text-center">Registrace</h2>
-            <RegistrationForm />
-          </div>
         )}
-        {/* Přihlášení & Aktivace */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4 text-center">
-            {loggedInUser ? `Vítej, ${toVocative(loggedInUser.name)}!` : "Přihlášení"}
-          </h2>
-          {loggedInUser && (
-               <button 
-                   onClick={handleLogout}
-                   className="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 rounded mb-4"
-               >
-                   Odhlásit se
-               </button>
-          )}
-          {!loggedInUser && <LoginForm />}
-          {loggedInUser && !isActivated && <ActivateCourseForm userEmail={loggedInUser.email} />}
-          {loggedInUser && isActivated && (
-             <div className="text-center text-green-700 font-bold p-4 bg-green-100 rounded">
-                ✅ Kurz je aktivní a odemčený.
-             </div>
-          )}
-        </div>
-      </section>
-    </main>
+
+        {/* Benefit sekce - vždy viditelná */}
+        <section className={styles.benefitSection}>
+          <div className={styles.benefitContent}>
+            <h2>Proč si vybrat náš online kurz?</h2>
+            <ul>
+              <li>Flexibilní studium kdykoliv a odkudkoliv</li>
+              <li>Praktické ukázky a detailní návody</li>
+              <li>Podpora zkušené lektorky Vlaďky Anděl Liškové</li>
+              <li>Přístup ke kurzu na počítači i mobilu</li>
+              <li>Certifikát o absolvování</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </>
   );
 } 
