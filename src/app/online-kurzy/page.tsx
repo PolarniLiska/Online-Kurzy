@@ -3,6 +3,7 @@
 import LandingSection from "@/components/landing-section";
 import TextCard from "@/components/text-card";
 import Button from "@/components/button";
+import VideoPlayer from "@/components/video-player";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
@@ -29,6 +30,61 @@ const lessons = [
     content: <><span title="Nejčastější chyby a jejich řešení">Tipy a triky pro profesionální výsledek.</span></>,
     fullTitle: "Nejčastější chyby a jejich řešení"
   },
+];
+
+// 🎥 KONFIGURACE VIDEÍ - UPRAVUJ TADY! 
+const courseVideos = [
+  {
+    id: "video-1",
+    title: "Úvod do tetování obočí",
+    description: "Základní přehled techniky a potřebného vybavení",
+    duration: "15 min",
+    // Možnosti pro různé typy videí:
+    videoType: "youtube" as const,         // youtube | vimeo | local | url
+    videoId: "dQw4w9WgXcQ",               // YouTube video ID (příklad)
+    videoSrc: undefined,                   // Pro lokální videa
+    thumbnailSrc: undefined,               // Náhledový obrázek
+  },
+  {
+    id: "video-2", 
+    title: "Výběr správné techniky",
+    description: "Jak vybrat nejlepší přístup pro každého klienta",
+    duration: "22 min",
+    videoType: "youtube" as const,
+    videoId: "dQw4w9WgXcQ", // ZMĚŇ NA SKUTEČNÉ ID
+    videoSrc: undefined,
+    thumbnailSrc: undefined,
+  },
+  {
+    id: "video-3",
+    title: "Praktická ukázka - část 1", 
+    description: "Krok za krokem celý proces tetování",
+    duration: "35 min",
+    videoType: "local" as const,
+    videoId: undefined,
+    videoSrc: "/videos/kurz-3.mp4", // Pro lokální video
+    thumbnailSrc: "/videos/thumbs/kurz-3.jpg", // Náhledový obrázek
+  },
+  {
+    id: "video-4",
+    title: "Praktická ukázka - část 2",
+    description: "Dokončení a finální úpravy", 
+    duration: "28 min",
+    videoType: "vimeo" as const,
+    videoId: "123456789", // Vimeo video ID
+    videoSrc: undefined,
+    thumbnailSrc: undefined,
+  },
+  {
+    id: "video-5",
+    title: "Péče po zákroku a řešení problémů",
+    description: "Aftercare a nejčastější chyby",
+    duration: "18 min", 
+    videoType: "url" as const,
+    videoId: undefined,
+    videoSrc: "https://example.com/direct-video-url.mp4", // Přímé URL
+    thumbnailSrc: undefined,
+  }
 ];
 
 import React, { useState, useEffect } from "react";
@@ -235,12 +291,10 @@ function ActivateCourseForm({ userEmail }: { userEmail: string }) {
   };
 
   return (
-    <form className="flex flex-col gap-4 mt-4" onSubmit={handleSubmit} autoComplete="off">
-      <h3 className="text-xl font-bold text-center">Aktivace kurzu</h3>
+    <form onSubmit={handleSubmit} autoComplete="off">
       <input
         type="text"
         placeholder="Zadejte kód kurzu"
-        className="border rounded px-3 py-2 focus:outline-none focus:ring"
         value={code}
         onChange={(e) => setCode(e.target.value.toUpperCase())}
         required
@@ -249,7 +303,6 @@ function ActivateCourseForm({ userEmail }: { userEmail: string }) {
       {success && <div className="text-green-700 text-sm">{success}</div>}
       <button
         type="submit"
-        className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded mt-2 disabled:opacity-50"
         disabled={loading}
       >
         {loading ? "Aktivuji..." : "Aktivovat kurz"}
@@ -408,14 +461,16 @@ function OnlineKurzyContent() {
             {showHeroForm && (
               <div className={styles.heroFormWrapper}>
                 {loggedInUser && !isActivated ? (
-                  <>
-                    <h1>Aktivace kurzu</h1>
-                    <p>Zadejte aktivační kód, který jste obdrželi po zakoupení kurzu.</p>
-                    <ActivateCourseForm userEmail={loggedInUser.email} />
-                    <div className={styles.heroAuthLinks}>
-                      <button onClick={handleLogout} style={{background:'#7a6a4f',color:'#fff',border:'none',borderRadius:'8px',padding:'0.7rem 1.5rem',fontWeight:600,cursor:'pointer',marginTop:'1.5rem'}}>Odhlásit se</button>
+                  <div className={styles.formContainer + ' ' + styles.formActive}>
+                    <div className={styles.formInner}>
+                      <h1>Aktivace kurzu</h1>
+                      <p>Zadejte aktivační kód, který jste obdrželi po zakoupení kurzu.</p>
+                      <ActivateCourseForm userEmail={loggedInUser.email} />
+                      <div className={styles.heroAuthLinks}>
+                        <button onClick={handleLogout} style={{background:'#7a6a4f',color:'#fff',border:'none',borderRadius:'8px',padding:'0.7rem 1.5rem',fontWeight:600,cursor:'pointer',marginTop:'1.5rem'}}>Odhlásit se</button>
+                      </div>
                     </div>
-                  </>
+                  </div>
                 ) : (
                   <>
                     <div className={`${styles.formContainer} ${!showLogin ? styles.formActive : ''}`}>
@@ -450,29 +505,63 @@ function OnlineKurzyContent() {
           </div>
         </section>
 
-        {/* Obsah kurzu - pouze pro přihlášené a aktivované */}
-        {loggedInUser && isActivated && (
-          <section className={styles.lessonsSection}>
-            <h2>Obsah kurzu</h2>
-            <div className={styles.lessonsList}>
-              {lessons.map((lesson, idx) => (
-                <TextCard
-                  key={idx}
-                  title={
-                    lesson.fullTitle ? (
-                      <>
-                        <span className="small">Chyby a jejich řešení</span>
-                      </>
-                    ) : (
-                      lesson.title
-                    )
-                  }
-                  content={lesson.content}
+        {/* Videolekce - VŽDY viditelné, ale videa 2-5 zamčená až do aktivace */}
+        <section className={styles.videoLessonsSection}>
+          <h2>Videolekce</h2>
+          <p className={styles.videoDescription}>
+            {loggedInUser && isActivated 
+              ? "Praktické videolekce s detailními ukázkami. Máte přístup ke všem videím."
+              : "Praktické videolekce s detailními ukázkami. Po aktivaci kurzu získáte přístup ke všem videím."
+            }
+          </p>
+          <div className={styles.videoGrid}>
+            {courseVideos.map((video, idx) => {
+              // Video 1 je vždy odemčené, videa 2-5 jsou zamčená před aktivací
+              const isFirstVideo = idx === 0;
+              const isUnlocked = isFirstVideo || (loggedInUser && isActivated);
+              
+              return (
+                <VideoPlayer
+                  key={video.id}
+                  videoId={video.videoId || video.id}
+                  title={video.title}
+                  description={video.description}
+                  duration={video.duration}
+                  isLocked={!isUnlocked}
+                  videoType={video.videoType}
+                  videoSrc={video.videoSrc}
+                  thumbnailSrc={video.thumbnailSrc}
                 />
-              ))}
-            </div>
-          </section>
-        )}
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Obsah kurzu - VŽDY viditelné (popis toho, co kurz obsahuje) */}
+        <section className={styles.lessonsSection}>
+          <h2>Obsah kurzu</h2>
+          <p className={styles.courseDescription}>
+            Náš kompletní online kurz tetování obočí pokrývá všechny důležité aspekty této techniky. 
+            Kurz je rozdělen do několika modulů, které vás provedou od základů až po pokročilé techniky.
+          </p>
+          <div className={styles.lessonsList}>
+            {lessons.map((lesson, idx) => (
+              <TextCard
+                key={idx}
+                title={
+                  lesson.fullTitle ? (
+                    <>
+                      <span className="small">Chyby a jejich řešení</span>
+                    </>
+                  ) : (
+                    lesson.title
+                  )
+                }
+                content={lesson.content}
+              />
+            ))}
+          </div>
+        </section>
 
         {/* Benefit sekce - vždy viditelná */}
         <section className={styles.benefitSection}>

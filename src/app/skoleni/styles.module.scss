@@ -7,16 +7,15 @@
 
     h1 {
         padding-left: 2rem;
-        font-size: $title-size-s;
+        // Používá globální h1 styl z globals.scss
         text-align: center;
     }
 
+    // Přepíšeme pouze specifické styly, velikost písma je globální
     .schooling ul,
     .schooling li {
-        font-size: 2rem;
-        /* pokud používáte 10px v html => 1.6rem = 16px */
-        line-height: 1.5;
-        /* případně další styl, jaký chcete mít */
+        // Globální velikost z $list-size se použije automaticky
+        line-height: 1.6; // Lepší čitelnost
     }
 
     .schoolings {
@@ -42,14 +41,14 @@
 
             h2 {
                 text-align: center;
-                font-size: 2rem;
+                // Používá globální h2 styl z globals.scss
                 margin-top: 0;
                 margin-bottom: 0.5rem;
             }
 
             h3 {
                 text-align: center;
-                font-size: 1.8rem;
+                // Používá globální h3 styl z globals.scss
                 margin-top: 0;
                 margin-bottom: 0.5rem;
             }
@@ -57,7 +56,7 @@
             p {
                 margin-bottom: 0rem;
                 text-align: center;
-                font-size: 1.6rem;
+                // Používá globální p styl z globals.scss
             }
 
             ul li {
@@ -67,7 +66,7 @@
             .item {
                 display: flex;
                 justify-content: space-between;
-                font-size: 1.6rem;
+                font-size: $font-size-base; // Používá standardní velikost
             }
 
             a {

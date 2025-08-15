@@ -58,7 +58,7 @@
                 margin-bottom: 1rem;
                 padding: 1rem 1rem;
 
-                font-size: $font-size-s;
+                font-size: $font-size-s; // Malá velikost pro formulář
                 border: 1px solid black;
                 border-radius: 1rem;
 
@@ -73,7 +73,7 @@
 
             .submitButton {
                 padding: 1rem 1rem;
-                font-size: $font-size-s;
+                font-size: $font-size-s; // Malá velikost pro formulář
                 border: 1px solid black;
                 border-radius: 1rem;
                 background: transparent;
@@ -95,7 +95,7 @@
         .address {
             .info {
                 text-align: center;
-                font-size: $font-size-s;
+                font-size: $font-size-s; // Malá velikost pro formulář
 
                 a {
                     text-decoration: none;

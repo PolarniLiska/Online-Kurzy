@@ -68,7 +68,7 @@
             text-align: center;
             color: white;
             font-weight: 400;
-            font-size: $title-size-s;
+            font-size: $title-size-h3; // Používá h3 velikost
         }
 
         .description {
@@ -78,7 +78,7 @@
 
             text-align: center;
 
-            font-size: 1.6rem;
+            font-size: $font-size-base; // Standardní velikost
             color: white;
         }
 
@@ -90,7 +90,7 @@
             transform: translateX(-50%);
             text-align: center;
 
-            font-size: 2rem;
+            font-size: $button-size; // Velikost pro tlačítka
             color: white;
             padding: 1rem 0.5rem;
             border: 1px solid white;

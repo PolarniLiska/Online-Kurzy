@@ -1,3 +1,5 @@
+@import "/src/app/variables.module.scss";
+
 .onlineKurzyPage {
   display: flex;
   flex-direction: column;
@@ -48,16 +50,24 @@
   align-items: center;
   text-align: center;
   h1 {
-    font-size: 2.6rem;
+    font-size: $title-size-h1; // Používá globální velikost
     color: #fff;
     margin: 0 0 1.2rem 0;
     text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$title-size-h1} * #{$mobile-scale});
+    }
   }
   p {
-    font-size: 1.3rem;
+    font-size: $font-size-m; // Mírně větší pro hero sekci
     color: #fff;
     margin: 0 0 2rem 0;
     text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$font-size-m} * #{$mobile-scale});
+    }
   }
 }
 
@@ -66,8 +76,12 @@
   h2 {
     text-align: center;
     color: #c59d5f;
-    font-size: 2rem;
+    font-size: $title-size-h2; // Používá globální velikost
     margin-bottom: 2rem;
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$title-size-h2} * #{$mobile-scale});
+    }
   }
 }
 .lessonsList {
@@ -103,7 +117,7 @@
   }
 }
 .lessonsList .title {
-  font-size: 1.2rem;
+  font-size: $title-size-h4; // Používá h4 velikost pro karty
   padding: 10px 0;
   white-space: normal;
   overflow: hidden;
@@ -120,6 +134,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
+  @media (max-width: 768px) {
+    font-size: calc(#{$title-size-h4} * #{$mobile-scale});
+  }
 }
 .lessonsList .title span {
   display: block;
@@ -131,7 +149,7 @@
   color: #7a6a4f;
 }
 .lessonsList .content {
-  font-size: 1rem;
+  font-size: $font-size-s; // Menší pro obsah karet
   padding: 10px;
   text-align: center;
   overflow: hidden;
@@ -141,6 +159,10 @@
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+  
+  @media (max-width: 768px) {
+    font-size: calc(#{$font-size-s} * #{$mobile-scale});
+  }
 }
 
 .benefitSection {
@@ -159,15 +181,25 @@
   gap: 2rem;
   h2 {
     color: #c59d5f;
-    font-size: 2rem;
+    font-size: $title-size-h2; // Používá globální velikost
     margin-bottom: 1rem;
     text-align: center;
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$title-size-h2} * #{$mobile-scale});
+    }
   }
   ul {
     color: #222;
-    font-size: 1.5rem;
+    font-size: $font-size-base; // Standardní velikost pro seznam
     padding-left: 1.2rem;
     margin: 0 0 1.5rem 0;
+    line-height: 1.6; // Lepší čitelnost
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$font-size-base} * #{$mobile-scale});
+    }
+    
     li {
       margin-bottom: 0.9rem;
     }
@@ -179,7 +211,7 @@
   background: linear-gradient(90deg, #7a6a4f 0%, #c59d5f 100%);
   color: #fff;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: $button-size;
   border: none;
   border-radius: 12px;
   padding: 1.1rem 2.2rem;
@@ -200,7 +232,7 @@
   background: #f1ede7;
   color: #7a6a4f;
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: $button-size;
   border: none;
   border-radius: 10px;
   padding: 0.7rem 1.5rem;
@@ -330,6 +362,271 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+// =============================
+// STYLING PRO VIDEOLEKCE SEKCI
+// =============================
+
+.courseDescription {
+  text-align: center;
+  color: #666;
+  font-size: $font-size-m; // Mírně větší pro důležitost
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  @media (max-width: 768px) {
+    font-size: calc(#{$font-size-m} * #{$mobile-scale});
+  }
+}
+
+// Videolekce sekce - styly pro aktivované uživatele
+.videoLessonsSection {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f8f5f1 0%, #faf8f6 100%);
+  border-radius: 1.5rem;
+  margin: 2rem 0;
+
+  h2 {
+    text-align: center;
+    color: #c59d5f;
+    font-size: $title-size-h2; // Používá globální velikost
+    margin-bottom: 1rem;
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$title-size-h2} * #{$mobile-scale});
+    }
+  }
+}
+
+.videoDescription {
+  text-align: center;
+  color: #666;
+  font-size: $font-size-m; // Mírně větší pro důležitost
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  @media (max-width: 768px) {
+    font-size: calc(#{$font-size-m} * #{$mobile-scale});
+  }
+}
+
+// Grid pro videa
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+}
+
+// Jednotlivý video item
+.videoItem {
+  background: #fff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  h3 {
+    color: #333;
+    font-size: $title-size-h3; // Používá globální velikost
+    margin: 1rem 1rem 0.5rem;
+    font-weight: 600;
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$title-size-h3} * #{$mobile-scale});
+    }
+  }
+
+  p {
+    color: #666;
+    font-size: $font-size-base; // Standardní velikost
+    margin: 0 1rem 1rem;
+    line-height: 1.6; // Lepší čitelnost
+    
+    @media (max-width: 768px) {
+      font-size: calc(#{$font-size-base} * #{$mobile-scale});
+    }
+  }
+}
+
+// Wrapper pro video s aspect ratio
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9; // Standardní poměr stran pro video
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+// Placeholder pro video (místo skutečného přehrávače)
+.videoPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8e4e1 0%, #f0ebe6 100%);
+  color: #7a6a4f;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  
+  p {
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+    color: #7a6a4f;
+  }
+}
+
+// Play button pro aktivní videa
+.playButton {
+  width: 60px;
+  height: 60px;
+  background: rgba(197, 157, 95, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background: rgba(197, 157, 95, 1);
+    transform: scale(1.1);
+  }
+}
+
+// =============================
+// STYLY PRO ZAMČENÁ VIDEA
+// =============================
+
+// Zamčené video item
+.videoLocked {
+  opacity: 0.7;
+  
+  &:hover {
+    transform: none; // Zamčená videa se nepohybují při hoveru
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); // Základní stín zůstává
+  }
+
+  h3, p {
+    color: #999; // Zašedlý text pro zamčená videa
+  }
+}
+
+// Placeholder pro zamčená videa
+.lockedPlaceholder {
+  background: linear-gradient(135deg, #d0d0d0 0%, #e0e0e0 100%);
+  color: #888;
+  
+  p {
+    color: #888;
+  }
+}
+
+// Lock icon místo play buttonu
+.lockIcon {
+  width: 60px;
+  height: 60px;
+  background: rgba(150, 150, 150, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+// Blur overlay pro zamčená videa
+.blurOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+// Doba trvání videa
+.videoDuration {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #666;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0 1rem 1rem;
+}
+
+// Info o odemknutí
+.unlockInfo {
+  margin: 0 1rem 1.5rem;
+  
+  small {
+    color: #999;
+    font-style: italic;
+    font-size: 0.85rem;
+  }
+}
+
+// =============================
+// RESPONZIVNÍ ÚPRAVY
+// =============================
+
+@media (max-width: 768px) {
+  .videoLessonsSection {
+    padding: 2rem 0;
+    margin: 1.5rem 0;
+  }
+  
+  .videoDescription {
+    padding: 0 1rem;
+    font-size: 1rem;
+  }
+  
+  .videoItem {
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.95rem;
+    }
+  }
+  
+  .playButton, .lockIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
   }
 }
  

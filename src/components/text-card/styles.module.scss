@@ -21,7 +21,7 @@
     .content {
         color: black;
         text-align: center;
-        font-size: $font-size-s;
+        font-size: $font-size-s; // Zůstává malá velikost pro karty
         padding: 20px 10px 40px 10px;
         box-sizing: border-box;
     }

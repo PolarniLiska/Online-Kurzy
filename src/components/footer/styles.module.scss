@@ -31,7 +31,7 @@
 
             p.title {
                 color: black;
-                font-size: 1.6rem;
+                font-size: $font-size-m; // Mírně větší pro důležitost
                 font-weight: 600;
                 margin: 2rem 0 1rem 0;
             }
@@ -39,7 +39,7 @@
             .item {
                 text-decoration: none;
                 color: black;
-                font-size: 1.6rem;
+                font-size: $font-size-base; // Standardní velikost
                 margin: 0;
 
                 a {
@@ -54,6 +54,6 @@
         background-color: #D8BD93;
         text-align: center;
         padding: 1rem 0rem;
-        font-size: 1.4rem;
+        font-size: $font-size-s; // Menší pro podpis
     }
 }

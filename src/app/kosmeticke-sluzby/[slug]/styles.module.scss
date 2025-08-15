@@ -4,7 +4,7 @@
     padding: 2rem $w-padding-s;
 
     h1 {
-        font-size: $title-size-s;
+        font-size: $title-size-h1;
         text-align: center;
     }
 
@@ -15,7 +15,7 @@
     }
 
     p {
-        font-size: $font-size-s;
+        font-size: $font-size-base;
     }
 
     .priceList {
@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
 
-            font-size: $font-size-s;
+            font-size: $font-size-base;
             padding: 1rem;
 
             &:nth-child(2n) {

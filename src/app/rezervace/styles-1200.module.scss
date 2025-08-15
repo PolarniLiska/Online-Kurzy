@@ -4,7 +4,7 @@
             position: relative;
 
             h2 {
-                font-size: $title-size-m - 0.2rem;
+                font-size: calc(#{$title-size-h2} - 0.2rem);
                 text-align: left;
             }
 

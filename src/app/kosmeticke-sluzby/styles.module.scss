@@ -7,13 +7,21 @@
         padding: 2rem $w-padding-s;
 
         h1 {
-            font-size: $title-size-s;
+            font-size: $title-size-h1; // Používá nový systém
             text-align: center;
+            
+            @media (max-width: 768px) {
+                font-size: calc(#{$title-size-h1} * #{$mobile-scale});
+            }
         }
 
         p {
-            font-size: $font-size-s;
+            font-size: $font-size-base; // Používá nový systém
             text-align: center;
+            
+            @media (max-width: 768px) {
+                font-size: calc(#{$font-size-base} * #{$mobile-scale});
+            }
         }
 
         @media (min-width: 800px) {

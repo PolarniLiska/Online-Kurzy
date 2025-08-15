@@ -8,15 +8,23 @@
     }
 
     .title {
-        font-size: $title-size-s;
+        font-size: $title-size-h1; // Větší pro hlavní nadpis
         text-align: center;
         font-weight: 600;
+        
+        @media (max-width: 768px) {
+            font-size: calc(#{$title-size-h1} * #{$mobile-scale});
+        }
     }
 
     .description {
-        font-size: $font-size-s;
+        font-size: $font-size-base; // Standardní velikost
         text-align: center;
         font-weight: 400;
+        
+        @media (max-width: 768px) {
+            font-size: calc(#{$font-size-base} * #{$mobile-scale});
+        }
     }
 
     .beforeTattoo {
@@ -27,22 +35,22 @@
         background-size: 100% 100%;
 
         h2 {
-            font-size: 2rem;
+            font-size: $title-size-h2; // Používá globální velikost
         }
 
         p {
-            font-size: 1.6rem;
+            font-size: $font-size-base; // Standardní velikost
         }
 
         h3 {
             text-align: left;
-            font-size: 1.8rem;
+            font-size: $title-size-h3; // Používá globální velikost
             font-weight: 400;
         }
 
         ul li {
             text-align: left;
-            font-size: 1.6rem;
+            font-size: $list-size; // Používá velikost pro seznamy
         }
 
         @media (min-width: 800px) {
@@ -51,30 +59,31 @@
             background-position: 84%;
             p {
                 margin-bottom: 4rem;
-                font-size: 1.8rem;
+                font-size: $font-size-m; // Mírně větší na desktopu
             }
 
             h3 {
                 margin: 0;
                 font-weight: 600;
+                // Velikost dědí z globálního h3
             }
 
             ul li {
-                font-size: 1.8rem;
+                font-size: $font-size-m; // Větší na desktopu
             }
         }
     }
 
     .recommended {
         h2 {
-            font-size: 2rem;
+            font-size: $title-size-h2; // Používá globální velikost
             text-align: center;
             margin-bottom: 1.5rem;
         }
 
         ul li {
             text-align: left;
-            font-size: 1.6rem;
+            font-size: $list-size; // Používá velikost pro seznamy
         }
 
         @media (min-width: 800px) {
@@ -83,7 +92,7 @@
                 margin-bottom: 2.5rem;
             }
             ul li {
-                font-size: 1.8rem;
+                font-size: $font-size-m; // Větší na desktopu
             }
         }
     }
@@ -96,12 +105,12 @@
         background-size: 100% 100%;
 
         h2 {
-            font-size: 2rem;
+            font-size: $title-size-h2; // Používá globální velikost
         }
 
         ol li {
             text-align: left;
-            font-size: 1.6rem;
+            font-size: $list-size; // Používá velikost pro seznamy
             margin-bottom: 1rem;
         }
 
@@ -116,7 +125,7 @@
             }
 
             ol li {
-                font-size: 1.8rem;
+                font-size: $font-size-m; // Větší na desktopu
                 margin-bottom: 2rem;
             }
         }
